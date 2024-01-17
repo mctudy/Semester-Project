@@ -1,0 +1,54 @@
+#include <stdio.h>
+int user_control1,user_control2; //variable pentru a verifica ce alege utilizatorul
+int g = 10; //se declara variabila g care reprezinta acceleratia gravitationala
+float coef_of_friction,force,mass,force_of_friction; //se declara variabilele ce determina coef de frecare,forta,masa si forta de frecare
+float sinus = 0.6; //se declara variabila pentru valoare sinusului
+float cosinus=0.8; //se declara variabila pentru valoare cosinusului
+float acceleration_up(float mass,float force) //functie pentru a calulca acceleratia corpului cand urca
+{
+    float a;
+    a= (force - (coef_of_friction * mass * g * cosinus) - mass * g * sinus) / mass;
+    return a;
+}
+float acceleration_down(float mass,float force)  //functie pentru a calcula acceleratia corpului cand coboara
+{
+    float a;
+    a=(force-(coef_of_friction*mass*g*cosinus)+(mass*g*sinus))/mass;
+    return a;
+}
+int main() {
+    printf("Welcome to the Physics Problem Calculator!\n");
+    printf("This calculator will help you solve a simple physics problem in which an object is ascending or descending on an incline.\n");
+    printf("Please press ENTER to continue\n");
+        getchar(); //se verifica daca este apasata tasta ENTER pentru a continua programul
+    printf("Firstly you will need to select if the object is ascending or descending\n");
+    printf("If the object is ascending please type A\n");
+    printf("If the object is descending please type D\n");
+        user_control1=getchar(); //se verifica daca utilizatorul a tastat litera A pentru urcarea corpului sau litera D pentru coborarea corpului
+    printf("Please input the mass of the object:");
+        scanf("%f",&mass); //se introduce valorea masei corpului
+        printf("\nPlease input the force that is driving the object:");
+        scanf("%f",&force); //se introduce valoare fortei care impinge corpul
+        printf("\nPlease input the coefficient of friction:");
+        scanf("%f",&coef_of_friction); //se introduce valorea coef de frecare
+    printf("\nWhat do you want to calculate?\n");
+    printf("If you want to calculate the Acceleration of the object please press A\n");
+    user_control2=getchar();  //se verifica daca utilizatorul a tastat litera A pentru  a calcula valoarea acceleratiei corpului
+    printf("If you want to calculate the Force of Friction of the object please press F\n");
+    user_control2=getchar();  // se verifica daca utilizatorul  a tastat litera F pentru a calcula valoarea fortei de frecare a corpului
+if(user_control2=='A') //daca utilizatorul a apasat tasta A se calculeaza acceleratia obiectului
+{
+    if(user_control1=='A'){
+    printf("The acceleration of the object is:%f", acceleration_up(mass,force));}  //daca utilizatorul a apasat tasta A pentru urcarea corpului se va chema functia de acceleratie si se va afisa acceleratia
+    if(user_control1=='D'){
+    printf("The acceleration of the object is:%f", acceleration_down(mass,force));}  //daca utilizatorul a apasat tasta D pentru coborarea corpului se va chema functia de acceleratie si se va afisa acceleratia
+}
+if(user_control2=='F') //daca utilizatorul a apasta tasta F se calculeaza forta de frecare a corpului
+{
+    force_of_friction=coef_of_friction*mass*g*cosinus;  //se calculeaza forta de frecare a corpului
+    printf("The Force of Friction of the object is:%f",force_of_friction);   //se afiseaza forta de frecare a corpului
+}
+
+
+    return 0;
+}
